@@ -1,0 +1,15 @@
+form[name="add_team"] {
+    width: 40%;
+}
+
+@media only screen and (max-width: 1200px) {
+    form[name="add_team"] {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    form[name="add_team"] {
+        width: 80%;
+    }
+}

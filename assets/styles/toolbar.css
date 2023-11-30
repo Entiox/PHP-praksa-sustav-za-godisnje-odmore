@@ -1,0 +1,40 @@
+#toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+#profile_dropdown {
+    position: relative;
+}
+
+#toolbar_paths > * {
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#profile_dropdown_options {
+    display: none;
+    width: 180px;
+    border: 1px solid #707070;
+    border-radius: 10px;
+    background-color: white;
+    position: absolute;
+    flex-direction: column;
+    text-align: left;
+    z-index: 1;
+    right: 0;
+}
+
+#profile_dropdown_options > * {
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+#profile_dropdown_options > *:hover {
+    background-color: #dddddd;
+    font-weight: bold;
+}

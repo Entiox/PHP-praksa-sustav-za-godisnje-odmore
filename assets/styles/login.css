@@ -1,0 +1,24 @@
+#login-form {
+    margin: auto;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 280px;
+    gap: 15px;
+}
+
+#login-form > label, #login-form > div, #login-form input {
+    font-size: 1.3em;
+}
+
+#login-form > label {
+    font-weight: bold;
+}
+
+#login-form > button[type="submit"] {
+    margin-top: 30px;
+}
+
+#login-form > div {
+    margin-top: 20px;
+}

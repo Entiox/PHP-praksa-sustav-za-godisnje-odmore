@@ -1,0 +1,19 @@
+form[name="add_employee"] {
+    width: 40%;
+}
+
+#add_employee_roles {
+    border-radius: 25px 0px 0px 25px;
+}
+
+@media only screen and (max-width: 1200px) {
+    form[name="add_employee"] {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    form[name="add_employee"] {
+        width: 80%;
+    }
+}

@@ -1,0 +1,171 @@
+html {
+    font-family: 'Inter', sans-serif;
+    overflow-wrap: break-word;
+}
+
+body {
+    background-color: #d3d3d3;
+    padding: 1.5%;
+}
+
+h1 {
+    font-size: 5em;
+}
+
+h2 {
+    font-size: 4em;
+}
+
+h3 {
+    font-size: 3em;
+}
+
+h4 {
+    font-size: 2em;
+}
+
+h5 {
+    font-size: 1.5em;
+}
+
+input[type="text"], input[type="password"], input[type="date"], select {
+    padding: 12px 20px;
+    border-radius: 40px;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-align: start;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: #464646;
+    color: white;
+    padding: 15px 25px;
+    font-size: 1em;
+    border-radius: 40px;
+}
+
+a:not(.regular_link) {
+    display: inline-block;
+    background-color: #464646;
+    color: white;
+    padding: 15px 25px;
+    font-size: 1em;
+    border-radius: 40px;
+}
+
+button:hover, a:not(.regular_link):hover {
+    cursor: pointer;
+    background-color: #707070;
+}
+
+.flash_error {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+table {
+    margin-top: 30px;
+    border-collapse: collapse;
+    width: 60%;
+}
+  
+td, th {
+    text-align: center;
+}
+
+td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+th {
+    border: 2px solid black;
+    padding: 15px;
+}
+  
+tr:nth-child(even) {
+    background-color: rgb(230, 230, 230);
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.search > div > input {
+    width: 220px;
+    font-size: 1.2em;
+    margin-right: 1.5%;
+}
+
+.default_block {
+    padding: 50px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.default_block_content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.default_block_content > div > label {
+    margin-right: 20px;
+}
+
+.default_block_content > div > input {
+    margin-top: 10px;
+}
+
+.default_block_content label, .default_block_content input, .default_block_content select, .default_block_content span {
+    font-size: 1.2em;
+}
+
+.default_block_content > div:has(> button[type="submit"]) {
+    margin-top: 20px;
+}
+
+.default_block_exit {
+    text-align: end;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 600px){
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 2.5em;
+    }
+
+    h3 {
+        font-size: 2em;
+    }
+
+    h4 {
+        font-size: 1.5em;
+    }
+
+    h5 {
+        font-size: 1.35em;
+    }
+}

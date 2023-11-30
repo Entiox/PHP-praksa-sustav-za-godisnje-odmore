@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leader{% endblock %}
+
+{% block body %}
+    {% include 'toolbar.html.twig' with {'paths': {
+        'BROWSE VACATION REQUESTS': 'app_pending_vacation_requests', }} 
+    %}
+    <div>
+        <h4>Team: {{ team }}</h4>
+        {{ form_start(form) }}
+            {{ form_widget(form, { 'attr': { 'class': 'search' }}) }}
+        {{ form_end(form) }}
+        <table>
+            <tr>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>AVAILABLE<br>VACATION DAYS</th>
+                <th></th>
+            </tr>
+            {% for worker in workers %}
+                <tr>
+                    <td>{{ worker.firstName }}</td>
+                    <td>{{ worker.lastName }}</td>
+                    <td>{{ worker.availableVacationDays }}</td>
+                    <td><a href={{ path('app_worker_vacation_details', {'workerId': worker.id}) }}>DETAILS</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

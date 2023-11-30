@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pending vacation requests{% endblock %}
+
+{% block body %}
+    <div id="pending_vacation_requests" class="default_block">
+        <h4>Pending vacation requests</h4>
+        <div>
+            {% for vacationRequest in vacationRequests %}
+                <div>
+                    <div>
+                        <span>{{ vacationRequest.firstName }} {{ vacationRequest.lastName }}</span>
+                    </div>
+                    <div>
+                        <span>{{ vacationRequest.startingDate }} - {{ vacationRequest.endingDate }}</span>
+                    </div>
+                    <div>
+                        <a href="{{ path('app_approve_vacation_request', { 'workerId': vacationRequest.workerId, 'vacationRequestId': vacationRequest.id }) }}">APPROVE</a>
+                        <a href="{{ path('app_reject_vacation_request', { 'vacationRequestId': vacationRequest.id }) }}">REJECT</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <a href="{{ path("app_leader") }}">RETURN</a>
+        </div>
+    </div>
+{% endblock %}

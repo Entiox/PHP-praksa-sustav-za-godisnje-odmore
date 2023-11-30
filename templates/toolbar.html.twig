@@ -1,0 +1,16 @@
+<div id="toolbar">
+    <div id="toolbar_paths">
+    {% for key, path in paths %}
+        <a href="{{ path(path) }}">{{ key }}</a>
+    {% endfor %}
+    </div>
+    <div id="profile_dropdown">
+        <button id="profile_dropdown_prompt">PROFILE</button>
+        <div id="profile_dropdown_options">
+            <a href={{ path('app_personal_data') }} class="regular_link">Personal data</a>
+            <a href={{ path('app_change_password') }} class="regular_link">Change password</a>
+            <a href="{{ path('app_logout') }}" class="regular_link">Logout</a>
+        </div>
+    </div>
+</div>
+

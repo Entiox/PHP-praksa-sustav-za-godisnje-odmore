@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Worker{% endblock %}
+
+{% block body %}
+{% include 'toolbar.html.twig' with {'paths': {
+    'REQUEST VACATION ': 'app_request_vacation' }} 
+%}
+
+<div id='worker'>
+    <div>
+        <h4>Remaining available vacation days: {{ vacationData.availableVacationDays }}</h4>
+    </div>
+    <div id='worker_vacations'>
+    {% for year, yearlyVacationRequests in vacationData.vacationRequests %}
+        <div>
+            <h4>{{ year }}.</h4>
+            <div>
+                <div>
+                    <h5>Requested vacation date:</h5>
+                    {% if attribute(yearlyVacationRequests, 'pending') is defined %}
+                        <span>{{ yearlyVacationRequests.pending[0].startingDate }} - {{ yearlyVacationRequests.pending[0].endingDate }}</span>
+                    {% else %}
+                        <span>None</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <h5>Vacation dates:</h5>
+                    <div>
+                    {% if attribute(yearlyVacationRequests, 'approved') is defined %}
+                        {% for yearlyConfirmedVacationRequests in yearlyVacationRequests.confirmed %}
+                            <span>{{yearlyConfirmedVacationRequests.startingDate}} - {{yearlyConfirmedVacationRequests.endingDate}}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span>None</span>
+                    {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <h5>Rejected vacation dates:</h5>
+                    <div>
+                    {% if attribute(yearlyVacationRequests, 'rejected') is defined %}
+                        {% for yearlyRejectedVacationRequests in yearlyVacationRequests.rejected %}
+                            <span>{{yearlyRejectedVacationRequests.startingDate}} - {{yearlyRejectedVacationRequests.endingDate}}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span>None</span>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

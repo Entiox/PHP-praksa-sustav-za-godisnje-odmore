@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vacation details{% endblock %}
+
+{% block body %}
+    <div id="worker_vacation_details" class="default_block">
+        <h4>Used vacation dates during this year</h4>
+        <div class="default_block_content">
+            {% for vacationDate in vacationDates %}
+                <div>
+                    <span>{{ vacationDate.startingDate }} - {{ vacationDate.endingDate }}</span>
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <a href="{{ path("app_leader") }}">RETURN</a>
+        </div>
+    </div>
+{% endblock %}

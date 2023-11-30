@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personal data{% endblock %}
+
+{% block body %}
+    <div id="personal_data" class="default_block">
+        <h4>Personal data</h4>
+        <div class="default_block_content">
+            <span>Username: {{ data.username }}</span>
+            <span>First name: {{ data.firstName }}</span>
+            <span>Last name: {{ data.lastName }}</span>
+            <span>Team: {{ data.team }}</span>
+            <span>Roles: {{ data.roles }}</span>
+        </div>
+        <div class="default_block_exit">
+            <a href={{ path('app_base') }}>RETURN</a>
+        </div>
+    </div>
+{% endblock %}

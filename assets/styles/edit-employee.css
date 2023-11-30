@@ -1,0 +1,23 @@
+form[name="edit_employee"] {
+    width: 40%;
+}
+
+#edit_employee_roles {
+    border-radius: 25px 0px 0px 25px;
+}
+
+#edit_employee_delete_button {
+    background-color: darkred;
+}
+
+@media only screen and (max-width: 1200px) {
+    form[name="edit_employee"] {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    form[name="edit_employee"] {
+        width: 80%;
+    }
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+    {% include 'toolbar.html.twig' with {'paths': {
+        'ADD EMPLOYEE': 'app_add_employee',
+        'ADD TEAM': 'app_add_team' }} 
+    %}
+    <div class="admin">
+        {{ form_start(form) }}
+            {{ form_widget(form, { 'attr': { 'class': 'search' }}) }}
+        {{ form_end(form) }}
+        <table>
+            <tr>
+                <th>USERNAME</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>ROLE</th>
+                <th>TEAM</th>
+                <th></th>
+            </tr>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.firstName }}</td>
+                    <td>{{ employee.lastName }}</td>
+                    <td>{{ employee.roles }}</td>
+                    <td>{{ employee.team }}</td>
+                    <td><a href={{ path('app_edit_employee', {'employeeId': employee.id}) }}>EDIT</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
