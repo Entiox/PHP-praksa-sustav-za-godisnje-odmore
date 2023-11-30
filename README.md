@@ -1,2 +1,2 @@
 # PHP-praksa-sustav-za-godisnje-odmore
-Project for managing vacations inside company.
+Symfony project for managing vacations inside company.
