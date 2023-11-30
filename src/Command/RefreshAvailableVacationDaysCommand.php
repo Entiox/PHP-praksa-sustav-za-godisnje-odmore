@@ -33,7 +33,7 @@ class RefreshAvailableVacationDaysCommand extends Command
         $this->entityManager->flush();
 
         $io = new SymfonyStyle($input, $output);
-        $io->success('Vacation days of workers refreshed.');
+        $io->success('Vacation days refreshed.');
 
         return Command::SUCCESS;
     }
