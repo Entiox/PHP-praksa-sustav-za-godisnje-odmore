@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Controller\WorkerController;
 use App\Repository\VacationRequestRepository;
 use App\Util\DateWorker;
 use Doctrine\DBAL\Types\Types;

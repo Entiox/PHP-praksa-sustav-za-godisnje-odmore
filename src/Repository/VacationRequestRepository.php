@@ -22,14 +22,14 @@ class VacationRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, VacationRequest::class);
     }
 
-    public function findConfirmedAndOfCurrentYearByUserId($userId): array
+    public function findApprovedAndOfCurrentYearByUserId($userId): array
     {
         return $this->createQueryBuilder('v')
            ->where('v.user = :userId')
            ->andWhere('v.status = :status')
            ->andWhere('v.startingDate BETWEEN :yearStart AND :yearEnd')
            ->setParameter('userId', $userId)
-           ->setParameter('status', 'CONFIRMED')
+           ->setParameter('status', 'APPROVED')
            ->setParameter('yearStart', date('Y-01-01'))
            ->setParameter('yearEnd', date('Y-12-31'))
            ->orderBy('v.startingDate', 'DESC')

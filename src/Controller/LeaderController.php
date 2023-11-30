@@ -45,7 +45,7 @@ class LeaderController extends AbstractController
     #[Route('/leader/worker_vacation_details/{workerId}', name: 'app_worker_vacation_details')]
     public function displayWorkerVacationDetails($workerId, EntityManagerInterface $entityManager): Response
     {
-        $vacationRequests = $entityManager->getRepository(VacationRequest::class)->findConfirmedAndOfCurrentYearByUserId($workerId);
+        $vacationRequests = $entityManager->getRepository(VacationRequest::class)->findApprovedAndOfCurrentYearByUserId($workerId);
         $vacationDates = LeaderMapper::mapVacationRequestsToDates($vacationRequests);
         return $this->render('leader/worker-vacation-details.html.twig', [
             'vacationDates' => $vacationDates,
