@@ -6,7 +6,7 @@
     {% include 'toolbar.html.twig' with {'paths': {
         'BROWSE VACATION REQUESTS': 'app_pending_vacation_requests', }} 
     %}
-    <div>
+    <div id="leader">
         <h4>Team: {{ team }}</h4>
         {{ form_start(form) }}
             {{ form_widget(form, { 'attr': { 'class': 'search' }}) }}

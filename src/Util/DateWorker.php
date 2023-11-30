@@ -16,7 +16,6 @@ class DateWorker
         array_filter(array_values(Yasumi::create('Croatia', (int) date('Y') + 1)->getHolidayDates()), function($holidayDate) {
             return date('m', strtotime($holidayDate)) < 2;
         }));
-    
     }
 
     public static function getHolidayDates()
