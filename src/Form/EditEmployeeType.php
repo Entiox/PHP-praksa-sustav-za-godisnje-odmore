@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Enum\Role;
 use App\Entity\Team;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -18,7 +19,7 @@ class EditEmployeeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
+            ->add('email')
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -34,9 +35,9 @@ class EditEmployeeType extends AbstractType
             ->add('lastName')
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    'Worker' => 'ROLE_WORKER',
-                    'Project manager' => 'ROLE_PROJECT_MANAGER',
-                    'Team leader' => 'ROLE_TEAM_LEADER',
+                    'Worker' => Role::WORKER->value,
+                    'Project manager' => Role::PROJECT_MANAGER->value,
+                    'Team leader' => Role::TEAM_LEADER->value,
                 ],
                 'multiple' => true,
             ])
@@ -44,10 +45,12 @@ class EditEmployeeType extends AbstractType
                 'class' => Team::class,
                 'choice_label' => 'name',
             ])
-            ->add('submit', SubmitType::class, [
+            ->add('update', SubmitType::class, [
                 'label' => 'CONFIRM',
+            ])
+            ->add('delete', SubmitType::class, [
+                'label' => 'DELETE',
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

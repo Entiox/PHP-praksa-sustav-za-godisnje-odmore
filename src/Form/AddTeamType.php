@@ -13,10 +13,7 @@ class AddTeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('submit', SubmitType::class, [
-                'label' => 'CONFIRM',
-            ]);
+            ->add('name');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

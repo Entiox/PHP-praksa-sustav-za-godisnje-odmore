@@ -7,13 +7,19 @@
         'ADD EMPLOYEE': 'app_add_employee',
         'ADD TEAM': 'app_add_team' }} 
     %}
+    {% for flashMessage in app.flashes('success') %}
+        <div class="flash_success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <div id="admin">
-        {{ form_start(form) }}
-            {{ form_widget(form, { 'attr': { 'class': 'search' }}) }}
+        {{ form_start(form, { 'attr': { 'class': 'search' }}) }}
+            {{ form_widget(form) }}
+            <button type="submit">SEARCH</button>
         {{ form_end(form) }}
         <table>
             <tr>
-                <th>USERNAME</th>
+                <th>EMAIL</th>
                 <th>FIRST NAME</th>
                 <th>LAST NAME</th>
                 <th>ROLE</th>
@@ -22,7 +28,7 @@
             </tr>
             {% for employee in employees %}
                 <tr>
-                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.email }}</td>
                     <td>{{ employee.firstName }}</td>
                     <td>{{ employee.lastName }}</td>
                     <td>{{ employee.roles }}</td>

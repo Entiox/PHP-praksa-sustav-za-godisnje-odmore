@@ -6,9 +6,6 @@
     {{ form_start(form, { 'attr': { 'class': 'default_block' }}) }}
         <h4>Edit employee data</h4>
         {{ form_widget(form, { 'attr': { 'class': 'default_block_content' }}) }}
-        <div>
-            <a id="edit_employee_delete_button" href={{ path('app_delete_employee', {'employeeId': employeeId}) }}>DELETE</a>
-        </div>
         <div class="default_block_exit">
             <a href={{ path('app_admin') }}>RETURN</a>
         </div>

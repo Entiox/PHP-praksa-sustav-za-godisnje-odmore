@@ -11,7 +11,7 @@ class LeaderMapper
                 'id' => $worker->getId(),
                 'firstName' => $worker->getFirstName(),
                 'lastName' => $worker->getLastName(),
-                'username' => $worker->getUsername(),
+                'email' => $worker->getEmail(),
                 'availableVacationDays' => $worker->getAvailableVacationDays()
             ];
         }, $workers);

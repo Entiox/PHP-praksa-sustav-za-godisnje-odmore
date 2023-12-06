@@ -30,11 +30,7 @@ class ChangePasswordType extends AbstractType
                         'max' => 4096,
                     ]),
                 ]
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'CONFIRM',
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

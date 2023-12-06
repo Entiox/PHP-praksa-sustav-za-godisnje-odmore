@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Enum\Role;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -23,7 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $username = null;
+    #[Assert\Email(message: 'The email {{ value }} is not a valid email.',)]
+    private ?string $email = null;
 
     #[ORM\Column(length: 100)]
     private ?string $firstName = null;
@@ -61,14 +63,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getEmail(): ?string
     {
-        return $this->username;
+        return $this->email;
     }
 
-    public function setUsername(string $username): static
+    public function setEmail(string $email): static
     {
-        $this->username = $username;
+        $this->email = $email;
 
         return $this;
     }
@@ -104,7 +106,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string) $this->email;
     }
 
     /**
@@ -121,7 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRoles(array $roles): static
     {
-        $this->roles = $roles;
+            $this->roles = $roles;
 
         return $this;
     }
@@ -207,26 +209,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Callback]
     public function validateRoleCombination(ExecutionContextInterface $context, mixed $payload): void
     {
-        if(in_array('ROLE_WORKER', $this->getRoles()) && in_array('ROLE_PROJECT_MANAGER', $this->getRoles()) && in_array('ROLE_TEAM_LEADER', $this->getRoles()))
-        {
+        if(in_array(Role::WORKER->value, $this->getRoles()) && in_array(Role::PROJECT_MANAGER->value, $this->getRoles()) &&
+            in_array(Role::TEAM_LEADER->value, $this->getRoles())) {
             $context->buildViolation('User cannot have team leader, project manager and worker roles all together')
                 ->atPath('roles')
                 ->addViolation();
-        }
-        else if(in_array('ROLE_WORKER', $this->getRoles()) && in_array('ROLE_PROJECT_MANAGER', $this->getRoles()))
-        {
+        } else if(in_array(Role::WORKER->value, $this->getRoles()) && in_array(Role::PROJECT_MANAGER->value, $this->getRoles())) {
             $context->buildViolation('User cannot have both worker and project manager roles')
                 ->atPath('roles')
                 ->addViolation();
-        }
-        else if(in_array('ROLE_WORKER', $this->getRoles()) && in_array('ROLE_TEAM_LEADER', $this->getRoles()))
-        {
+        } else if(in_array(Role::WORKER->value, $this->getRoles()) && in_array(Role::TEAM_LEADER->value, $this->getRoles())) {
             $context->buildViolation('User cannot have both worker and team leader roles')
                 ->atPath('roles')
                 ->addViolation();
-        }
-        else if(in_array('ROLE_TEAM_LEADER', $this->getRoles()) && in_array('ROLE_PROJECT_MANAGER', $this->getRoles()))
-        {
+        } else if(in_array(Role::TEAM_LEADER->value, $this->getRoles()) && in_array(Role::PROJECT_MANAGER->value, $this->getRoles())) {
             $context->buildViolation('User cannot have both team leader and project manager roles')
                 ->atPath('roles')
                 ->addViolation();
@@ -236,10 +232,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Callback]
     public function validateIfTeamLeaderAlreadyInTeam(ExecutionContextInterface $context, mixed $payload): void
     {
-        if(in_array('ROLE_TEAM_LEADER', $this->getRoles()))
-        {
+        if(in_array(Role::TEAM_LEADER->value, $this->getRoles())) {
             foreach ($this->getTeam()->getUsers() as $user) {
-                if (in_array('ROLE_TEAM_LEADER', $user->getRoles()) && $user !== $this) {
+                if (in_array(Role::TEAM_LEADER->value, $user->getRoles()) && $user !== $this) {
                     $context->buildViolation('This team already has a team leader')
                         ->atPath('roles')
                         ->addViolation();
@@ -253,10 +248,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Callback]
     public function validateIfProjectManagerAlreadyInTeam(ExecutionContextInterface $context, mixed $payload): void
     {
-        if(in_array('ROLE_PROJECT_MANAGER', $this->getRoles()))
-        {
+        if(in_array(Role::PROJECT_MANAGER->value, $this->getRoles())) {
             foreach ($this->getTeam()->getUsers() as $user) {
-                if (in_array('ROLE_PROJECT_MANAGER', $user->getRoles()) && $user !== $this) {
+                if (in_array(Role::PROJECT_MANAGER->value, $user->getRoles()) && $user !== $this) {
                     $context->buildViolation('This team already has a project manager')
                         ->atPath('roles')
                         ->addViolation();

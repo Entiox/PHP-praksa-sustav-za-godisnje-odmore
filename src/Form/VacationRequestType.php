@@ -27,9 +27,6 @@ class VacationRequestType extends AbstractType
             ->add('endingDate', DateType::class, [
                 'label' => 'Ending date',
                 'widget' => 'single_text',
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'CONFIRM',
             ]);
     }
 

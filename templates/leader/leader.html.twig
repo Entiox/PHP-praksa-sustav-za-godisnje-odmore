@@ -8,9 +8,11 @@
     %}
     <div id="leader">
         <h4>Team: {{ team }}</h4>
-        {{ form_start(form) }}
-            {{ form_widget(form, { 'attr': { 'class': 'search' }}) }}
+        {{ form_start(form, { 'attr': { 'class': 'search' }}) }}
+            {{ form_widget(form) }}
+            <button type="submit">SEARCH</button>
         {{ form_end(form) }}
+
         <table>
             <tr>
                 <th>FIRST NAME</th>
@@ -28,5 +30,4 @@
             {% endfor %}
         </table>
     </div>
-
 {% endblock %}

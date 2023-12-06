@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Enum\Status;
 use App\Repository\VacationRequestRepository;
 use App\Util\DateWorker;
 use Doctrine\DBAL\Types\Types;
@@ -17,7 +18,8 @@ class VacationRequest
     #[ORM\Column]
     private ?int $id = null;
 
-    private const STATUSES = ['PENDING_BOTH', 'PENDING_TEAM_LEADER', 'PENDING_PROJECT_MANAGER', 'APPROVED', 'REJECTED'];
+    private const STATUSES = [Status::PENDING_BOTH->value, Status::PENDING_TEAM_LEADER->value, Status::PENDING_PROJECT_MANAGER->value,
+        Status::APPROVED->value, Status::REJECTED->value];
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\GreaterThanOrEqual('today', message: 'The starting date must be greater than or equal to current date.')]
@@ -99,8 +101,7 @@ class VacationRequest
     {
         $workingDays = DateWorker::calculateWorkingDays($this->startingDate, $this->endingDate);
 
-        if($workingDays > $this->getUser()->getAvailableVacationDays())
-        {
+        if($workingDays > $this->getUser()->getAvailableVacationDays()) {
             $context->buildViolation('Requested vacation exceeds available vacation days.')
                 ->addViolation();
         }

@@ -13,6 +13,6 @@
     text-align: center;
 }
 
-#title_and_login > h1 {
-    margin-bottom: 10%;
+#title_and_login > a {
+    margin-top: 5%;
 }

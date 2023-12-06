@@ -14,21 +14,15 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/login', name: 'app_login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if($this->getUser())
-        {
-            if($this->isGranted('ROLE_ADMIN'))
-            {
+        if($this->getUser()) {
+            if($this->isGranted('ROLE_ADMIN')) {
                 return $this->redirectToRoute('app_admin');
-            }
-            else if($this->isGranted('ROLE_PROJECT_MANAGER') || $this->isGranted('ROLE_TEAM_LEADER'))
-            {
+            } else if($this->isGranted('ROLE_PROJECT_MANAGER') || $this->isGranted('ROLE_TEAM_LEADER')) {
                 return $this->redirectToRoute('app_leader');
-            }
-            else
-            {
+            } else {
                 return $this->redirectToRoute('app_worker');
             }
         }
@@ -41,16 +35,16 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/logout', name: 'app_logout', methods: ['GET'])]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route(path: '/personal/change_password', name: 'app_change_password')]
+    #[Route(path: '/personal/change_password', name: 'app_change_password', methods: ['GET', 'PUT'])]
     public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
-        if(!$this->getUser()){
+        if(!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
 
@@ -65,16 +59,13 @@ class SecurityController extends AbstractController
             $oldPassword = $data['oldPassword'];
             $newPassword = $data['newPassword'];
 
-            if ($passwordHasher->isPasswordValid($user, $oldPassword))
-            {
+            if ($passwordHasher->isPasswordValid($user, $oldPassword)) {
                 $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
                 $entityManager->persist($user);
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_logout');
-            }
-            else
-            {
+            } else {
                 $this->addFlash('error', 'Incorrect old password.');
             }
         }
@@ -82,7 +73,7 @@ class SecurityController extends AbstractController
         return $this->render('common/password-change.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/personal/personal_data', name: 'app_personal_data')]
+    #[Route('/personal/personal_data', name: 'app_personal_data', methods: ['GET'])]
     public function personalData(EntityManagerInterface $entityManager): Response
     {
         /** @var \App\Entity\User $user */

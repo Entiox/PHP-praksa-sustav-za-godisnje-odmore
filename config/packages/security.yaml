@@ -8,7 +8,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
@@ -16,7 +16,6 @@ security:
             security: false
         main:
             lazy: true
-            provider: app_user_provider
             custom_authenticator: App\Security\LoginAuthenticator
             logout:
                 path: app_logout
@@ -28,6 +27,7 @@ security:
                 lifetime: 604800
                 path: /
                 always_remember_me: true
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

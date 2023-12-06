@@ -25,8 +25,7 @@ class RefreshAvailableVacationDaysCommand extends Command
     {
         $users = $this->entityManager->getRepository(User::class)->findAll();
 
-        foreach($users as $user)
-        {
+        foreach($users as $user) {
             $user->setAvailableVacationDays(20);
             $this->entityManager->persist($user);
         }

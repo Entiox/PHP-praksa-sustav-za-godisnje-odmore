@@ -9,10 +9,10 @@ class AdminMapper
         return array_map(function ($employee) {
             return [
                 'id' => $employee->getId(),
-                'username' => $employee->getUsername(),
+                'email' => $employee->getEmail(),
                 'firstName' => $employee->getFirstName(),
                 'lastName' => $employee->getLastName(),
-                'team' => $employee->getTeam()->getName() ?? 'No team',
+                'team' => $employee->getTeam() ? $employee->getTeam()->getName() : 'No team',
                 'roles' => implode(', ', array_map([UserMapper::class, 'mapRoleName'], $employee->getRoles())),
             ];
         }, $employees);

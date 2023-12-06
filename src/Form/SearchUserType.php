@@ -18,15 +18,12 @@ class SearchUserType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Unesite ime i prezime', 
                 ],
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'SEARCH',
             ]);
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults(['method' => 'GET']);
     }
 }

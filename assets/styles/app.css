@@ -28,7 +28,7 @@ h5 {
     font-size: 1.5em;
 }
 
-input[type="text"], input[type="password"], input[type="date"], select {
+input[type="text"], input[type="password"], input[type="date"], input[type="email"], select {
     padding: 12px 20px;
     border-radius: 40px;
 }
@@ -69,7 +69,7 @@ button:hover, a:not(.regular_link):hover {
     background-color: #707070;
 }
 
-.flash_error {
+.flash_error, .flash_success {
     margin-top: 25px;
     margin-bottom: 25px;
 }
@@ -108,7 +108,7 @@ tr:nth-child(odd) {
     gap: 20px;
 }
 
-.search > div > input {
+.search > div > div > input {
     width: 220px;
     font-size: 1.2em;
     margin-right: 1.5%;
@@ -139,7 +139,7 @@ tr:nth-child(odd) {
     font-size: 1.2em;
 }
 
-.default_block_content > div:has(> button[type="submit"]) {
+.default_block button[type="submit"] {
     margin-top: 20px;
 }
 
