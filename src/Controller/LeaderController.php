@@ -75,10 +75,13 @@ class LeaderController extends AbstractController
     {
         $vacationRequest = $entityManager->getRepository(VacationRequest::class)->find($vacationRequestId);
         $worker = $vacationRequest->getUser();
+        $shouldEmailNotificationBeSent = $vacationRequest->getStatus === Status::PENDING_PROJECT_MANAGER || $vacationRequest->getStatus === Status::PENDING_TEAM_LEADER;
         $event = new VacationRequestApprovedEvent($worker, $this->getUser(), $vacationRequest);
         $eventDispatcher->dispatch($event);
 
-        $bus->dispatch(new EmailNotificationMessage($worker->getEmail(), "Vacation request", 'Your vacation request has been approved.'));
+        if($shouldEmailNotificationBeSent) {
+            $bus->dispatch(new EmailNotificationMessage($worker->getEmail(), "Vacation request", 'Your vacation request has been approved.'));
+        }
 
         $this->addFlash('success', 'Vacation request approved');
 
