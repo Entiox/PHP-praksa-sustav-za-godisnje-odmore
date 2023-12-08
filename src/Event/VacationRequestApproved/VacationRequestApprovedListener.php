@@ -1,5 +1,5 @@
 <?php
-namespace App\Event\VacationReuqestApproved;
+namespace App\Event\VacationRequestApproved;
 
 use App\Entity\Enum\Role;
 use App\Entity\Enum\Status;

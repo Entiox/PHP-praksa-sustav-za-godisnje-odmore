@@ -1,5 +1,5 @@
 <?php
-namespace App\Event\VacationReuqestApproved;
+namespace App\Event\VacationRequestApproved;
 
 use App\Entity\User;
 use App\Entity\VacationRequest;
