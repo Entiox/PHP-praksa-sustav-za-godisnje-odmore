@@ -69,7 +69,7 @@ class LeaderController extends AbstractController
         ]);
     }
 
-    #[Route('/leader/approve_vacation_request/{vacationRequestId}', name: 'app_approve_vacation_request', methods: ['GET', 'PUT'])]
+    #[Route('/leader/approve_vacation_request/{vacationRequestId}', name: 'app_approve_vacation_request', methods: ['GET', 'PATCH'])]
     public function approveVacationRequest($vacationRequestId, EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, MessageBusInterface $bus): Response
     {
         $vacationRequest = $entityManager->getRepository(VacationRequest::class)->find($vacationRequestId);
@@ -87,7 +87,7 @@ class LeaderController extends AbstractController
         return $this->redirectToRoute('app_pending_vacation_requests');
     }
 
-    #[Route('/leader/reject_vacation_request/{vacationRequestId}', name: 'app_reject_vacation_request', methods: ['GET', 'PUT'])]
+    #[Route('/leader/reject_vacation_request/{vacationRequestId}', name: 'app_reject_vacation_request', methods: ['GET', 'PATCH'])]
     public function rejectVacationRequest($vacationRequestId, EntityManagerInterface $entityManager, MessageBusInterface $bus): Response
     {
 

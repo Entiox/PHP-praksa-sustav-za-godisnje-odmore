@@ -54,7 +54,7 @@ class AdminController extends AbstractController
         return $this->render('admin/add-employee.html.twig', ['form' => $form->createView()]);
     }
 
-    #[Route('/admin/edit_employee/{employeeId}', name: 'app_edit_employee', methods: ['GET', 'PUT'])]
+    #[Route('/admin/edit_employee/{employeeId}', name: 'app_edit_employee', methods: ['GET', 'PATCH'])]
     public function editEmployee($employeeId, Request $request, EntityManagerInterface $entityManager, EmployeeFormHandler $employeeFormHandler): Response
     {
         $employee = $entityManager->getRepository(User::class)->find($employeeId);

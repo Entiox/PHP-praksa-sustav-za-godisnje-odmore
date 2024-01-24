@@ -41,7 +41,7 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route(path: '/personal/change_password', name: 'app_change_password', methods: ['GET', 'PUT'])]
+    #[Route(path: '/personal/change_password', name: 'app_change_password', methods: ['GET', 'PATCH'])]
     public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
         if(!$this->getUser()) {
